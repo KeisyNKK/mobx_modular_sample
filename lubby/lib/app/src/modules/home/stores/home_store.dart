@@ -1,4 +1,4 @@
-import 'package:lubby/app/src/modules/models/client.dart';
+import 'package:lubby/app/src/modules/home/models/client/client.dart';
 import 'package:mobx/mobx.dart';
 
 part 'home_store.g.dart';
@@ -18,11 +18,6 @@ abstract class HomeStoreBase with Store {
   // should use @computed property, but null safety problem ocurred
   bool isValid() {
     return (validateName() == null && validateEmail() == null);
-  }
-
-  @computed
-  get isName {
-    return validateName() == null;
   }
 
   String validateName() {

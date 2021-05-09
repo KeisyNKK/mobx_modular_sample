@@ -9,13 +9,6 @@ part of 'home_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$HomeStore on HomeStoreBase, Store {
-  Computed<dynamic>? _$isNameComputed;
-
-  @override
-  dynamic get isName => (_$isNameComputed ??=
-          Computed<dynamic>(() => super.isName, name: 'HomeStoreBase.isName'))
-      .value;
-
   final _$counterAtom = Atom(name: 'HomeStoreBase.counter');
 
   @override
@@ -34,8 +27,7 @@ mixin _$HomeStore on HomeStoreBase, Store {
   @override
   String toString() {
     return '''
-counter: ${counter},
-isName: ${isName}
+counter: ${counter}
     ''';
   }
 }
