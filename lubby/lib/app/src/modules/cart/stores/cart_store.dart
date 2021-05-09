@@ -1,29 +1,36 @@
+import 'package:lubby/app/src/shared/models/cart_item.dart';
 import 'package:lubby/app/src/shared/models/product.dart';
-import 'package:lubby/app/src/shared/services/product_service.dart';
 import 'package:mobx/mobx.dart';
-
 part 'cart_store.g.dart';
 
-class CartStore = _CartStoreBase with _$CartStore;
+class ShoppingCart = _ShoppingCartBase with _$ShoppingCart;
 
-abstract class _CartStoreBase with Store {
-  final ProductService _productService;
-
+abstract class _ShoppingCartBase with Store {
   @observable
-  ObservableFuture<List<Product>> products = ObservableFuture.value(null);
+  ObservableList<CartItem> obs = <CartItem>[].asObservable();
 
-  bool loading() {
-    return products.status == FutureStatus.pending;
+  int itemsCount() {
+    return obs.length;
   }
 
-  bool hasError() {
-    return products.error != null;
+  double total() {
+    return 1;
   }
-
-  _CartStoreBase(this._productService);
 
   @action
-  void reload() {
-    products = _productService.findAll().asObservable();
+  void add(Product item) {
+    obs.add(CartItem(item));
+  }
+
+  @action
+  void remove(CartItem item) {
+    obs.remove(item);
+  }
+
+  bool contains(Product product) {
+    if (obs.contains(CartItem(product))) {
+      return true;
+    }
+    return false;
   }
 }

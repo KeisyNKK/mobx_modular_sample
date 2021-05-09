@@ -8,40 +8,51 @@ part of 'cart_store.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$CartStore on _CartStoreBase, Store {
-  final _$productsAtom = Atom(name: '_CartStoreBase.products');
+mixin _$ShoppingCart on _ShoppingCartBase, Store {
+  final _$obsAtom = Atom(name: '_ShoppingCartBase.obs');
 
   @override
-  ObservableFuture<List<Product>> get products {
-    _$productsAtom.reportRead();
-    return super.products;
+  ObservableList<CartItem> get obs {
+    _$obsAtom.reportRead();
+    return super.obs;
   }
 
   @override
-  set products(ObservableFuture<List<Product>> value) {
-    _$productsAtom.reportWrite(value, super.products, () {
-      super.products = value;
+  set obs(ObservableList<CartItem> value) {
+    _$obsAtom.reportWrite(value, super.obs, () {
+      super.obs = value;
     });
   }
 
-  final _$_CartStoreBaseActionController =
-      ActionController(name: '_CartStoreBase');
+  final _$_ShoppingCartBaseActionController =
+      ActionController(name: '_ShoppingCartBase');
 
   @override
-  void reload() {
-    final _$actionInfo = _$_CartStoreBaseActionController.startAction(
-        name: '_CartStoreBase.reload');
+  void add(Product item) {
+    final _$actionInfo = _$_ShoppingCartBaseActionController.startAction(
+        name: '_ShoppingCartBase.add');
     try {
-      return super.reload();
+      return super.add(item);
     } finally {
-      _$_CartStoreBaseActionController.endAction(_$actionInfo);
+      _$_ShoppingCartBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void remove(CartItem item) {
+    final _$actionInfo = _$_ShoppingCartBaseActionController.startAction(
+        name: '_ShoppingCartBase.remove');
+    try {
+      return super.remove(item);
+    } finally {
+      _$_ShoppingCartBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   String toString() {
     return '''
-products: ${products}
+obs: ${obs}
     ''';
   }
 }
