@@ -1,6 +1,6 @@
 # lubby
 
-A new Flutter project.
+Lubby is a product management solution in flutter
 
 ## Getting Started
 
