@@ -1,5 +1,6 @@
-import 'package:lubby/app/src/modules/add_products/addProducts_Page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+
+import 'add_products_page.dart';
 
 class AddProductsModule extends Module {
   @override

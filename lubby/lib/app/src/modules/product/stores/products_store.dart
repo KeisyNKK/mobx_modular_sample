@@ -4,9 +4,9 @@ import 'package:mobx/mobx.dart';
 
 part 'products_store.g.dart';
 
-class ProductsStore = _AddProductsStoreBase with _$ProductsStore;
+class ProductsStore = _ProductsStoreBase with _$ProductsStore;
 
-abstract class _AddProductsStoreBase with Store {
+abstract class _ProductsStoreBase with Store {
   final ProductService _productService;
 
   @observable
@@ -20,7 +20,13 @@ abstract class _AddProductsStoreBase with Store {
     return products.error != null;
   }
 
-  _AddProductsStoreBase(this._productService);
+  @action
+  add() {
+    _productService.add(Product("Novo prod", "Novin", 10));
+    reload();
+  }
+
+  _ProductsStoreBase(this._productService);
 
   @action
   void reload() {

@@ -2,7 +2,7 @@ import 'package:lubby/app/src/shared/models/product.dart';
 import 'package:lubby/app/src/shared/services/product_service.dart';
 import 'package:mobx/mobx.dart';
 
-part 'addProducts_store.g.dart';
+part 'add_products_store.g.dart';
 
 class AddProductsStore = _AddProductsStoreBase with _$AddProductsStore;
 

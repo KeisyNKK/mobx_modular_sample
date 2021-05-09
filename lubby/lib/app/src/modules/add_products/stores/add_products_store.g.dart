@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'products_store.dart';
+part of 'add_products_store.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,8 +8,8 @@ part of 'products_store.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$ProductsStore on _ProductsStoreBase, Store {
-  final _$productsAtom = Atom(name: '_ProductsStoreBase.products');
+mixin _$AddProductsStore on _AddProductsStoreBase, Store {
+  final _$productsAtom = Atom(name: '_AddProductsStoreBase.products');
 
   @override
   ObservableFuture<List<Product>> get products {
@@ -24,28 +24,17 @@ mixin _$ProductsStore on _ProductsStoreBase, Store {
     });
   }
 
-  final _$_ProductsStoreBaseActionController =
-      ActionController(name: '_ProductsStoreBase');
-
-  @override
-  dynamic add() {
-    final _$actionInfo = _$_ProductsStoreBaseActionController.startAction(
-        name: '_ProductsStoreBase.add');
-    try {
-      return super.add();
-    } finally {
-      _$_ProductsStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
+  final _$_AddProductsStoreBaseActionController =
+      ActionController(name: '_AddProductsStoreBase');
 
   @override
   void reload() {
-    final _$actionInfo = _$_ProductsStoreBaseActionController.startAction(
-        name: '_ProductsStoreBase.reload');
+    final _$actionInfo = _$_AddProductsStoreBaseActionController.startAction(
+        name: '_AddProductsStoreBase.reload');
     try {
       return super.reload();
     } finally {
-      _$_ProductsStoreBaseActionController.endAction(_$actionInfo);
+      _$_AddProductsStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 

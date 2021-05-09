@@ -2,19 +2,19 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter/material.dart';
 import 'package:lubby/app/src/modules/cart/stores/cart_store.dart';
-import 'package:lubby/app/src/modules/product/stores/products_store.dart';
 import 'package:lubby/app/src/routes/routes.dart';
 import 'package:lubby/app/src/shared/models/cart_item.dart';
 
-class AddProductsPage extends StatefulWidget {
+import 'stores/products_store.dart';
+
+class ProductsPage extends StatefulWidget {
   final String title;
-  const AddProductsPage({Key key, this.title = 'AddProductsPage'})
-      : super(key: key);
+  const ProductsPage({Key key, this.title = 'ProductsPage'}) : super(key: key);
   @override
-  AddProductsPageState createState() => AddProductsPageState();
+  ProductsPageState createState() => ProductsPageState();
 }
 
-class AddProductsPageState extends State<AddProductsPage> {
+class ProductsPageState extends State<ProductsPage> {
   final ProductsStore store = Modular.get();
 
   ProductsStore _homeStore;
@@ -52,31 +52,65 @@ class AddProductsPageState extends State<AddProductsPage> {
             onRefresh: () async {
               _homeStore.reload();
             },
-            child: ListView.builder(
-                itemCount: items.length,
-                itemBuilder: (_, int index) {
-                  final product = items[index];
-                  return Observer(builder: (_) {
-                    return ListTile(
-                      leading: _counterStore.contains(product)
-                          ? const Icon(Icons.remove_shopping_cart,
-                              color: Colors.red)
-                          : const Icon(Icons.add_shopping_cart,
-                              color: Colors.red),
-                      onTap: () {
-                        if (_counterStore.contains(product)) {
-                          _counterStore.remove(CartItem(product));
-                        } else {
-                          _counterStore.add(product);
-                        }
-                      },
-                      title: Text("${product.name}"),
-                      subtitle: Text(
-                        "${product.price.toStringAsFixed(2)}",
-                      ),
-                    );
-                  });
-                }),
+            child: Container(
+              padding: EdgeInsets.all(0),
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              child: Column(
+                children: [
+                  Container(
+                    height: (70.0 * items.length),
+                    width: MediaQuery.of(context).size.width,
+                    child: ListView.builder(
+                        itemCount: items.length,
+                        itemBuilder: (_, int index) {
+                          final product = items[index];
+                          return Observer(builder: (_) {
+                            return ListTile(
+                              leading: _counterStore.contains(product)
+                                  ? const Icon(Icons.remove_shopping_cart,
+                                      color: Colors.red)
+                                  : const Icon(Icons.add_shopping_cart,
+                                      color: Colors.red),
+                              onTap: () {
+                                if (_counterStore.contains(product)) {
+                                  _counterStore.remove(CartItem(product));
+                                } else {
+                                  _counterStore.add(product);
+                                }
+                              },
+                              title: Text("1${product.name}"),
+                              subtitle: Text(
+                                "${product.price.toStringAsFixed(2)}",
+                              ),
+                            );
+                          });
+                        }),
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.add_circle, color: Colors.red),
+                    onTap: () {
+                      _homeStore.add();
+                      Modular.to.pushNamed(add);
+                    },
+                    title: Text("Crie um produto"),
+                    subtitle: Text(
+                      " ",
+                    ),
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.add_circle, color: Colors.red),
+                    onTap: () {
+                      Modular.to.pushNamed(add);
+                    },
+                    title: Text("Crie um produto"),
+                    subtitle: Text(
+                      " ",
+                    ),
+                  )
+                ],
+              ),
+            ),
           );
       }),
       floatingActionButton: FloatingActionButton(
