@@ -1,6 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:lubby/app/src/routes/routes.dart';
-import '../home/home_store.dart';
+import 'stores/home_store.dart';
 
 import 'home_page.dart';
 

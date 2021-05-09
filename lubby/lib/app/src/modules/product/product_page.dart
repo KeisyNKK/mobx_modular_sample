@@ -1,15 +1,15 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter/material.dart';
-import 'package:lubby/app/src/modules/product/product_store.dart';
+import 'package:lubby/app/src/modules/product/stores/product_store.dart';
 
-class ProductPage extends StatefulWidget {
+class ProductsPage extends StatefulWidget {
   final String title;
-  const ProductPage({Key key, this.title = 'ProductPage'}) : super(key: key);
+  const ProductsPage({Key key, this.title = 'ProductPage'}) : super(key: key);
   @override
   ProductPageState createState() => ProductPageState();
 }
 
-class ProductPageState extends State<ProductPage> {
+class ProductPageState extends State<ProductsPage> {
   final ProductStore store = Modular.get();
 
   @override

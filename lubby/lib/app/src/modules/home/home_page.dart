@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:lubby/app/src/modules/home/stores/home_store.dart';
+import 'package:lubby/app/src/routes/routes.dart';
+
+import 'stores/home_store.dart';
 
 class HomePage extends StatefulWidget {
   final String title;
@@ -49,7 +51,11 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
           }),
           Observer(
               builder: (_) => ElevatedButton(
-                    onPressed: controller.isValid() ? () {} : null,
+                    onPressed: controller.isValid()
+                        ? () {
+                            Modular.to.pushNamed(cart);
+                          }
+                        : null,
                     child: Text("Go to form"),
                   ))
         ],
