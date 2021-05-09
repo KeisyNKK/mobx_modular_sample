@@ -1,7 +1,6 @@
-import 'package:lubby/app/home/repositories/post_repository.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-
-import 'modules/home/home_module.dart';
+import 'package:lubby/app/src/modules/home/home_module.dart';
+import 'package:lubby/app/src/modules/home/repositories/post_repository.dart';
 
 class AppModule extends Module {
   @override
