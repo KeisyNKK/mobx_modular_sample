@@ -12,6 +12,17 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends ModularState<HomePage, HomeStore> {
+  _textField({String labelText, onChanged, String Function() errorText}) {
+    return TextField(
+      onChanged: onChanged,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(),
+        labelText: labelText,
+        errorText: errorText == null ? null : errorText(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +35,23 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
           Observer(
             builder: (context) => Text('${store.counter}'),
           ),
-          TextButton(onPressed: () {}, child: Text("Go to form"))
+          Observer(builder: (_) {
+            return _textField(
+                labelText: "Nome",
+                onChanged: controller.client.changeName,
+                errorText: controller.validateName);
+          }),
+          Observer(builder: (_) {
+            return _textField(
+                labelText: "Email",
+                onChanged: controller.client.changeEmail,
+                errorText: controller.validateEmail);
+          }),
+          Observer(
+              builder: (_) => ElevatedButton(
+                    onPressed: controller.isValid() ? () {} : null,
+                    child: Text("Go to form"),
+                  ))
         ],
       )),
       floatingActionButton: FloatingActionButton(
