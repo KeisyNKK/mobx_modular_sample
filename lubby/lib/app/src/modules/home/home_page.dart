@@ -18,9 +18,15 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
       appBar: AppBar(
         title: Text('Counter'),
       ),
-      body: Observer(
-        builder: (context) => Text('${store.counter}'),
-      ),
+      body: Container(
+          child: Column(
+        children: [
+          Observer(
+            builder: (context) => Text('${store.counter}'),
+          ),
+          TextButton(onPressed: () {}, child: Text("Go to form"))
+        ],
+      )),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           store.increment();
