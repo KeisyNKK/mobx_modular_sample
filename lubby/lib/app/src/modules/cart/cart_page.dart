@@ -21,7 +21,7 @@ class _CartPageState extends State<CartPage> {
     return Scaffold(
       appBar: AppBar(
         title: Observer(builder: (_) {
-          return Text("${shoppingCart.total().toStringAsFixed(2)}");
+          return Text("Produtos");
         }),
       ),
       body: Observer(builder: (_) {
@@ -40,17 +40,20 @@ class _CartPageState extends State<CartPage> {
                     child: Container(
                         height: 120,
                         padding: const EdgeInsets.only(bottom: 20, top: 20),
-                        color: Colors.orange,
+                        color: Colors.blue[200],
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: <Widget>[
                             Container(
-                              margin: const EdgeInsets.only(left: 5),
-                              height: 100,
-                              width: 100,
-                              color: Colors.red,
-                            ),
+                                margin: const EdgeInsets.only(left: 5),
+                                height: 100,
+                                width: 100,
+                                color: Colors.blue[600],
+                                child: Icon(
+                                  Icons.gif_outlined,
+                                  color: Colors.white,
+                                )),
                             Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,

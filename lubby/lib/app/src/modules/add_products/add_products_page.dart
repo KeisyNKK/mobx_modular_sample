@@ -42,8 +42,11 @@ class _AddProductsPageState
           color: Colors.white,
           child: Column(
             children: [
+              SizedBox(
+                height: 40,
+              ),
               Container(
-                color: Colors.red,
+                color: Colors.blue[50],
                 width: 100,
                 height: 100,
                 child: Observer(
@@ -65,21 +68,31 @@ class _AddProductsPageState
                   },
                 ),
               ),
-              Observer(builder: (_) {
-                return _textField(
-                  labelText: "Nome",
-                  onChanged: controller.product.changeName,
-                );
-              }),
-              Observer(builder: (_) {
-                return _textField(
-                  keyboardType: TextInputType.number,
-                  labelText: "Preço",
-                  onChanged: (value) {
-                    controller.product.changePrice(double.parse(value));
-                  },
-                );
-              }),
+              Padding(
+                padding: EdgeInsets.all(40),
+                child: Column(
+                  children: [
+                    Observer(builder: (_) {
+                      return _textField(
+                        labelText: "Nome",
+                        onChanged: controller.product.changeName,
+                      );
+                    }),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Observer(builder: (_) {
+                      return _textField(
+                        keyboardType: TextInputType.number,
+                        labelText: "Preço",
+                        onChanged: (value) {
+                          controller.product.changePrice(double.parse(value));
+                        },
+                      );
+                    })
+                  ],
+                ),
+              ),
               Observer(builder: (_) {
                 return ElevatedButton(
                     onPressed: () => controller.add(),
