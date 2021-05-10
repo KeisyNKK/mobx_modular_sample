@@ -1,5 +1,7 @@
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:lubby/app/src/modules/add_products/models/product_store.dart';
+import 'package:lubby/app/src/modules/product/stores/products_store.dart';
 import 'package:lubby/app/src/shared/models/product.dart';
-import 'package:lubby/app/src/shared/services/product_service.dart';
 import 'package:mobx/mobx.dart';
 
 part 'add_products_store.g.dart';
@@ -7,23 +9,11 @@ part 'add_products_store.g.dart';
 class AddProductsStore = _AddProductsStoreBase with _$AddProductsStore;
 
 abstract class _AddProductsStoreBase with Store {
-  final ProductService _productService;
+  var product = ProductStore();
 
-  @observable
-  ObservableFuture<List<Product>> products = ObservableFuture.value(null);
+  var _homeStore = Modular.get<ProductsStore>();
 
-  bool loading() {
-    return products.status == FutureStatus.pending;
-  }
-
-  bool hasError() {
-    return products.error != null;
-  }
-
-  _AddProductsStoreBase(this._productService);
-
-  @action
-  void reload() {
-    products = _productService.findAll().asObservable();
+  void add() {
+    _homeStore.add(Product("123 ${product.name}", product.name, product.price));
   }
 }

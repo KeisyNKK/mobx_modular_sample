@@ -21,8 +21,8 @@ abstract class _ProductsStoreBase with Store {
   }
 
   @action
-  add() {
-    _productService.add(Product("Novo prod", "Novin", 10));
+  add(Product product) {
+    _productService.add(product);
     reload();
   }
 

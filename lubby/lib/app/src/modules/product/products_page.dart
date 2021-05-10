@@ -68,10 +68,11 @@ class ProductsPageState extends State<ProductsPage> {
                           return Observer(builder: (_) {
                             return ListTile(
                               leading: _counterStore.contains(product)
-                                  ? const Icon(Icons.remove_shopping_cart,
-                                      color: Colors.red)
-                                  : const Icon(Icons.add_shopping_cart,
-                                      color: Colors.red),
+                                  ? const Icon(
+                                      Icons.remove_shopping_cart_rounded,
+                                      color: Colors.cyan)
+                                  : const Icon(Icons.add_shopping_cart_rounded,
+                                      color: Colors.green),
                               onTap: () {
                                 if (_counterStore.contains(product)) {
                                   _counterStore.remove(CartItem(product));
@@ -90,7 +91,6 @@ class ProductsPageState extends State<ProductsPage> {
                   ListTile(
                     leading: const Icon(Icons.add_circle, color: Colors.red),
                     onTap: () {
-                      _homeStore.add();
                       Modular.to.pushNamed(add);
                     },
                     title: Text("Crie um produto"),
@@ -98,16 +98,6 @@ class ProductsPageState extends State<ProductsPage> {
                       " ",
                     ),
                   ),
-                  ListTile(
-                    leading: const Icon(Icons.add_circle, color: Colors.red),
-                    onTap: () {
-                      Modular.to.pushNamed(add);
-                    },
-                    title: Text("Crie um produto"),
-                    subtitle: Text(
-                      " ",
-                    ),
-                  )
                 ],
               ),
             ),

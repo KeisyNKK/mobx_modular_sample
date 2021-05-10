@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:lubby/app/src/modules/add_products/add_products_module.dart';
 import 'package:lubby/app/src/modules/cart/cart_module.dart';
 import 'package:lubby/app/src/modules/home/home_module.dart';
 import 'package:lubby/app/src/modules/home/stores/home_store.dart';
@@ -22,5 +23,6 @@ class AppModule extends Module {
     ModuleRoute(cart, module: CartModule()),
     ModuleRoute(home, module: HomeModule()),
     ModuleRoute(products, module: ProductsModule()),
+    ModuleRoute(add, module: AddProductsModule()),
   ];
 }

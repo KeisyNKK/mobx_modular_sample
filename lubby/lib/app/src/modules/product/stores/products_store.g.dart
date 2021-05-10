@@ -28,11 +28,11 @@ mixin _$ProductsStore on _ProductsStoreBase, Store {
       ActionController(name: '_ProductsStoreBase');
 
   @override
-  dynamic add() {
+  dynamic add(Product product) {
     final _$actionInfo = _$_ProductsStoreBaseActionController.startAction(
         name: '_ProductsStoreBase.add');
     try {
-      return super.add();
+      return super.add(product);
     } finally {
       _$_ProductsStoreBaseActionController.endAction(_$actionInfo);
     }

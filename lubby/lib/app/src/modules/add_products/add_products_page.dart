@@ -2,84 +2,91 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter/material.dart';
 import 'package:lubby/app/src/modules/add_products/stores/add_products_store.dart';
-import 'package:lubby/app/src/modules/cart/stores/cart_store.dart';
 import 'package:lubby/app/src/routes/routes.dart';
-import 'package:lubby/app/src/shared/models/cart_item.dart';
-import 'package:lubby/app/src/shared/services/rest_product_service.dart';
 
 class AddProductsPage extends StatefulWidget {
   final String title;
   const AddProductsPage({Key key, this.title = 'AddProductsPage'})
       : super(key: key);
   @override
-  AddProductsPageState createState() => AddProductsPageState();
+  _AddProductsPageState createState() => _AddProductsPageState();
 }
 
-class AddProductsPageState extends State<AddProductsPage> {
-  final AddProductsStore store = Modular.get();
-
-  AddProductsStore _homeStore;
-  ShoppingCart _counterStore;
-
-  @override
-  void initState() {
-    _homeStore = Modular.get<AddProductsStore>();
-    _homeStore.reload();
-    _counterStore = Modular.get<ShoppingCart>();
-
-    super.initState();
+class _AddProductsPageState
+    extends ModularState<AddProductsPage, AddProductsStore> {
+  _textField(
+      {String labelText,
+      onChanged,
+      String Function() errorText,
+      keyboardType}) {
+    return TextField(
+      keyboardType: keyboardType ?? TextInputType.name,
+      onChanged: onChanged,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(),
+        labelText: labelText,
+        errorText: errorText == null ? null : errorText(),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Observer(builder: (_) {
-          return Text("${_counterStore.itemsCount}");
-        }),
+        title: Text("Adicionar Produto"),
       ),
-      body: Observer(builder: (_) {
-        final items = _homeStore.products.value;
-        if (_homeStore.hasError())
-          return const Center(
-            child: Text("Ocorreu um erro"),
-          );
-        else if (_homeStore.loading())
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        else
-          return RefreshIndicator(
-            onRefresh: () async {
-              _homeStore.reload();
-            },
-            child: ListView.builder(
-                itemCount: items.length,
-                itemBuilder: (_, int index) {
-                  final product = items[index];
-                  return Observer(builder: (_) {
-                    return ListTile(
-                      leading: _counterStore.contains(product)
-                          ? const Icon(Icons.remove_shopping_cart,
-                              color: Colors.red)
-                          : const Icon(Icons.add_shopping_cart,
-                              color: Colors.red),
-                      onTap: () {
-                        if (_counterStore.contains(product)) {
-                          _counterStore.remove(CartItem(product));
-                        } else {
-                          _counterStore.add(product);
-                        }
-                      },
-                      title: Text("${product.name}"),
-                      subtitle: Text(
-                        "${product.price.toStringAsFixed(2)}",
-                      ),
+      body: Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          color: Colors.white,
+          child: Column(
+            children: [
+              Container(
+                color: Colors.red,
+                width: 100,
+                height: 100,
+                child: Observer(
+                  builder: (_) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          child: Text(controller.product.name ?? "novo"),
+                        ),
+                        Container(
+                          child: Text(controller.product.price == null
+                              ? "00"
+                              : controller.product.price.toString()),
+                        )
+                      ],
                     );
-                  });
-                }),
-          );
-      }),
+                  },
+                ),
+              ),
+              Observer(builder: (_) {
+                return _textField(
+                  labelText: "Nome",
+                  onChanged: controller.product.changeName,
+                );
+              }),
+              Observer(builder: (_) {
+                return _textField(
+                  keyboardType: TextInputType.number,
+                  labelText: "Preço",
+                  onChanged: (value) {
+                    controller.product.changePrice(double.parse(value));
+                  },
+                );
+              }),
+              Observer(builder: (_) {
+                return ElevatedButton(
+                    onPressed: () => controller.add(),
+                    child: Text("Adicionar produto"));
+              }),
+            ],
+          )),
       floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.shopping_cart),
           onPressed: () {
