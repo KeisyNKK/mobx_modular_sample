@@ -53,7 +53,7 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
               builder: (_) => ElevatedButton(
                     onPressed: controller.isValid()
                         ? () {
-                            Modular.to.pushNamed(cart);
+                            Modular.to.pushNamed(products);
                           }
                         : null,
                     child: Text("Go to form"),

@@ -3,13 +3,17 @@ import 'package:mobx/mobx.dart';
 part 'product_store.g.dart';
 
 class ProductStore = _ProductStoreBase with _$ProductStore;
-abstract class _ProductStoreBase with Store {
 
+abstract class _ProductStoreBase with Store {
   @observable
-  int value = 0;
+  String name;
 
   @action
-  void increment() {
-    value++;
-  } 
+  changeName(String value) => name = value;
+
+  @observable
+  double price;
+
+  @action
+  changePrice(double value) => price = value;
 }
