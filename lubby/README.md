@@ -1,6 +1,10 @@
 # lubby
 
-Lubby is a product management solution in flutter
+Lubby is a product management solution in flutter.
+
+# Stack and Patterns
+
+Here we use modular acthecture and mobx for state management.
 
 ## Getting Started
 
